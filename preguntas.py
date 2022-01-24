@@ -11,6 +11,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import os
 
 
 def pregunta_01():
@@ -21,8 +22,17 @@ def pregunta_01():
     214
 
     """
-    return
-
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row[0:-1] for row in data]
+    data = [row.split() for row in data]
+    data = [row[1] for row in data]
+    suma = 0
+    for row in data:
+        suma += int(row)
+    return suma
+#print(pregunta_01())
 
 def pregunta_02():
     """
@@ -39,7 +49,26 @@ def pregunta_02():
     ]
 
     """
-    return
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row[0:-1] for row in data]
+    data = [row.split() for row in data]
+    data = [row[0] for row in data]
+    letras = set(data)
+    conteo = {}
+    resultado = []
+    for letra in letras:
+        conteo[letra] = 0
+    for row in data:
+        conteo[row] += 1
+    
+    for key, value in conteo.items():
+        resultado.append((key, value))
+    resultado = sorted(resultado)
+    return resultado
+
+#print(pregunta_02())
 
 
 def pregunta_03():
@@ -57,7 +86,27 @@ def pregunta_03():
     ]
 
     """
-    return
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row[0:-1] for row in data]
+    data = [row.split() for row in data]
+    data = [[row[0], row[1]] for row in data]
+    columna_letras = [row[0] for row in data]
+    letras = set(columna_letras)
+    conteo = {}
+    resultado = []
+    for letra in letras:
+        conteo[letra] = 0
+    for row in data:
+        conteo[row[0]] += int(row[1])
+    
+    for key, value in conteo.items():
+        resultado.append((key, value))
+    resultado = sorted(resultado)
+    return resultado
+
+#print(pregunta_03())
 
 
 def pregunta_04():
@@ -82,8 +131,26 @@ def pregunta_04():
     ]
 
     """
-    return
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row for row in data]
+    data = [row.split() for row in data]
+    data = [row[2].split("-")[1] for row in data]
+    meses = set(data)
+    conteo = {}
+    resultado = []
+    for mes in meses:
+        conteo[mes] = 0
+    for row in data:
+        conteo[row] += 1
+    
+    for key, value in conteo.items():
+        resultado.append((key, value))
+    resultado = sorted(resultado)
+    return resultado
 
+print(pregunta_04())
 
 def pregunta_05():
     """

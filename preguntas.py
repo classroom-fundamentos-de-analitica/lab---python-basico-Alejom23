@@ -292,7 +292,7 @@ def pregunta_07():
 
     result = []
     for number in numbers:
-        result.append((number, numbers[number]))
+        result.append((int(number), numbers[number]))
 
     result = sorted(result, key= lambda x:x[0])
 
@@ -339,7 +339,7 @@ def pregunta_08():
 
     result = []
     for number in numbers:
-        result.append((number, sorted(list(set(numbers[number])))))
+        result.append((int(number), sorted(list(set(numbers[number])))))
 
     result = sorted(result, key= lambda x:x[0])
 
@@ -510,4 +510,4 @@ def pregunta_12():
     return result
 
 
-print(pregunta_12())
+#print(pregunta_12())

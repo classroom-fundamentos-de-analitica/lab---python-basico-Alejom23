@@ -150,7 +150,7 @@ def pregunta_04():
     resultado = sorted(resultado)
     return resultado
 
-print(pregunta_04())
+#print(pregunta_04())
 
 def pregunta_05():
     """
@@ -167,7 +167,37 @@ def pregunta_05():
     ]
 
     """
-    return
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row for row in data]
+    data = [row.split() for row in data]
+    data = [[row[0], row[1]] for row in data]
+
+    letters = {}
+    for row in data:
+        letter = row[0]
+        quant = int(row[1])
+        if letter not in letters:
+            letters[letter] = {"min" : quant,
+                                "max":quant}
+        else:
+            if quant > letters[letter]["max"]:
+                letters[letter]["max"] = quant
+            elif quant < letters[letter]["min"]:
+                letters[letter]["min"] = quant
+
+    result = []
+    for letter in letters:
+        result.append((letter, letters[letter]["max"], letters[letter]["min"]))
+
+    result = sorted(result, key= lambda x:x[0])
+
+    return result
+
+#print(pregunta_05())
+    
+
 
 
 def pregunta_06():
@@ -192,8 +222,37 @@ def pregunta_06():
     ]
 
     """
-    return
 
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row for row in data]
+    data = [row.split() for row in data]
+    data = [row[4].split(",") for row in data]
+
+    letters = {}
+    for row in data:
+        for code in row:
+            letter = code.split(":")[0]
+            quant = int(code.split(":")[1])
+            if letter not in letters:
+                letters[letter] = {"min" : quant,
+                                    "max":quant}
+            else:
+                if quant > letters[letter]["max"]:
+                    letters[letter]["max"] = quant
+                elif quant < letters[letter]["min"]:
+                    letters[letter]["min"] = quant
+
+    result = []
+    for letter in letters:
+        result.append((letter, letters[letter]["min"], letters[letter]["max"]))
+
+    result = sorted(result, key= lambda x:x[0])
+
+    return result
+    
+#print(pregunta_06())
 
 def pregunta_07():
     """
@@ -216,8 +275,30 @@ def pregunta_07():
     ]
 
     """
-    return
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row for row in data]
+    data = [row.split() for row in data]
+    data = [[row[0], row[1]] for row in data]
 
+    numbers = {}
+    for row in data:
+        number = row[1]
+        letter = row[0]
+        if number not in numbers:
+            numbers[number] = []
+        numbers[number].append(letter)
+
+    result = []
+    for number in numbers:
+        result.append((number, numbers[number]))
+
+    result = sorted(result, key= lambda x:x[0])
+
+    return result
+
+#print(pregunta_07())
 
 def pregunta_08():
     """
@@ -241,8 +322,30 @@ def pregunta_08():
     ]
 
     """
-    return
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row for row in data]
+    data = [row.split() for row in data]
+    data = [[row[0], row[1]] for row in data]
 
+    numbers = {}
+    for row in data:
+        number = row[1]
+        letter = row[0]
+        if number not in numbers:
+            numbers[number] = []
+        numbers[number].append(letter)
+
+    result = []
+    for number in numbers:
+        result.append((number, sorted(list(set(numbers[number])))))
+
+    result = sorted(result, key= lambda x:x[0])
+
+    return result
+
+#print(pregunta_08())
 
 def pregunta_09():
     """
@@ -264,8 +367,31 @@ def pregunta_09():
     }
 
     """
-    return
 
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row for row in data]
+    data = [row.split() for row in data]
+    data = [row[4].split(",") for row in data]
+
+    letters = {}
+    for row in data:
+        for code in row:
+            letter = code.split(":")[0]
+            quant = int(code.split(":")[1])
+            if letter not in letters:
+                letters[letter] = 1
+            else:
+                letters[letter] += 1
+
+    result = {}
+    for key in sorted(letters):
+        result[key] = letters[key]
+
+    return result
+
+#print(pregunta_09())
 
 def pregunta_10():
     """
@@ -285,8 +411,20 @@ def pregunta_10():
 
 
     """
-    return
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row for row in data]
+    data = [row.split() for row in data]
+    data = [[row[0], row[3], row[4]] for row in data]
 
+    letters = []
+    for row in data:
+        letters.append((row[0], len(row[1].split(",")), len(row[2].split(","))))
+
+    return letters
+
+#print(pregunta_10())
 
 def pregunta_11():
     """
@@ -306,8 +444,31 @@ def pregunta_11():
 
 
     """
-    return
 
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row for row in data]
+    data = [row.split() for row in data]
+    data = [[row[1], row[3]] for row in data]
+
+    letters_dict = {}
+    for row in data:
+        letters = row[1].split(",")
+        number = int(row[0])
+        for letter in letters:
+            if letter not in letters_dict:
+                letters_dict[letter] = number
+            else:
+                letters_dict[letter] += number
+
+    result = {}
+    for key in sorted(letters_dict):
+        result[key] = letters_dict[key]
+
+    return result
+
+#print(pregunta_11())
 
 def pregunta_12():
     """
@@ -324,4 +485,29 @@ def pregunta_12():
     }
 
     """
-    return
+
+    script_dir = os.path.dirname(__file__) + "/data.csv"
+    #print(script_dir)
+    data = open(script_dir, 'r').readlines()
+    data = [row for row in data]
+    data = [row.split() for row in data]
+    data = [[row[0], row[4]] for row in data]
+
+    letters = {}
+    for row in data:
+        letter = row[0]
+        numbers = [int(x.split(":")[1]) for x in row[1].split(",")]
+        for number in numbers:
+            if letter not in letters:
+                letters[letter] = number
+            else:
+                letters[letter] += number
+
+    result = {}
+    for key in sorted(letters):
+        result[key] = letters[key]
+
+    return result
+
+
+print(pregunta_12())
